@@ -31,5 +31,4 @@ class Dice:
   def roll_once(cls, num):
     return random.randrange(1, num+1
 
-
-  bot.run(token)
+bot.run(token)
