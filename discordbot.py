@@ -1,21 +1,35 @@
-from discord.ext import commands
-import os
-import traceback
+import random
+import re
 
-bot = commands.Bot(command_prefix='/')
-token = os.environ['DISCORD_BOT_TOKEN']
+class Dice:
+  @classmethod
+  def roll(cls, n, m):
+    """
+    [n]d[m]のダイスロールをする
+    """
 
-
-@bot.event
-async def on_command_error(ctx, error):
-    orig_error = getattr(error, "original", error)
-    error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
-    await ctx.send(error_msg)
+    return list(map(lambda x: x+cls.roll_once(m), [0]*n))
 
 
-@bot.command()
-async def ping(ctx):
-    await ctx.send('pong')
+  @classmethod
+  def roll_with_pattern(cls, _str):
+    """
+    "ndm"の文字列を受け取ってroll()を呼び出す
+    """
+    
+    pat = re.compile(r'(\d)[dD](\d+)')
+    reg = pat.search(_str)
+    if reg:
+      return cls.roll(
+        int( reg.group(1) ),
+        int( reg.group(2) )
+      )
+    else:
+      pass
+
+  @classmethod
+  def roll_once(cls, num):
+    return random.randrange(1, num+1
 
 
 bot.run(token)
