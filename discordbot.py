@@ -32,4 +32,4 @@ class Dice:
     return random.randrange(1, num+1
 
 
-bot.run(token)
+  bot.run(token)
