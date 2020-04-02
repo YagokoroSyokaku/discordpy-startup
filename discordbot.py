@@ -524,4 +524,4 @@ async def on_message(message):
             await message.channel.send(m) # discord.py ver1.0
             #await client.send_message(message.channel, m) # discord.py ver0.16
 
-client.run(client_id)
+client.run(token)
